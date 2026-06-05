@@ -16,7 +16,6 @@ const verifyJWT = async(req,res,next)=>{
       success : false
     })
   }
-
   req.user = decode;
   next(); 
   }

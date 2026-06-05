@@ -57,9 +57,9 @@ export const getAllCompanies = async(req,res)=>{
   }
 }
 
-export const  getCompanyById = async(req,res)=>{
+export const getCompanyById = async(req,res)=>{
   try{
-      let company_id = req.params.id;
+  let company_id = req.params.id;
   const company = await Company.findById(company_id);
   if(!company){
     return res.status(404).json({
@@ -85,7 +85,7 @@ export const updateCompany = async(req,res)=>{
     if(file){
       const fileUri = getDataUri(file);
       cloudResponse = await cloudinary.uploader.upload(fileUri.content,{
-        folder : 'Job_Portal_Store/Company'
+        folder : 'JobPortal/Company'
       })
     }
     let id = req.params.id;

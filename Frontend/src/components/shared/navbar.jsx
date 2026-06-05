@@ -13,11 +13,10 @@ import { setUser } from "@/store/authSlilce";
 
 
 function Navbar() {
-  const { user } = useSelector((store) => store.auth);
+  const {user} = useSelector((store) => store.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const logOutHandler = async () => {
+  const logOutHandler = async ()=>{
     try {
       const res = await axios.post(`${USER_END_POINT}/logout`, {}, { withCredentials: true })
       if (res.data.success) {

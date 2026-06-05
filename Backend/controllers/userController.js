@@ -7,7 +7,6 @@ import cloudinary from "../utilis/cloudinary.js";
 export const register = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
-
     if (!fullname || !email || !phoneNumber || !password || !role) {
       return res.status(400)
         .json({
@@ -28,7 +27,7 @@ export const register = async (req, res) => {
     if(file){
       const fileUri = getDataUri(file);
       cloudResponse = cloudinary.uploader.upload(fileUri.content, {
-        folder : 'Job_Portal_Store'
+        folder : 'JobPortal/Profile'
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -49,7 +48,10 @@ export const register = async (req, res) => {
     })
   }
   catch (err) {
-    console.log(err);
+    return res.status(500).json({
+      message : err.message ,
+      success : false 
+    })
   }
 }
 
@@ -98,8 +100,7 @@ export const login = async (req, res) => {
         message: "You are logged In",
         user,
         success: true
-      });
-
+    });
   }
   catch (err) {
     console.log(err);
@@ -152,11 +153,11 @@ export const updataProfile = async (req, res) => {
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (skills) user.profile.skills = skillsArray;
     if (bio) user.profile.bio = bio;
-    if (cloudResponse) {
+    if (cloudResponse){
       user.profile.resume = cloudResponse.secure_url;
       user.profile.resumeOriginalName = file.originalname
     }
-
+    
     await user.save();
     const updatedUser = {
       _id: user._id,

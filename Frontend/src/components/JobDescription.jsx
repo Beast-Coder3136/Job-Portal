@@ -10,14 +10,15 @@ import { APPLICATION_END_POINT, JOBS_END_POINT } from "@/constant";
 import { toast } from "sonner";
 
 function JobDescription() {
+    
     const dispatch = useDispatch();
     const { singleJob } = useSelector(store => store.jobs);
     const { user } = useSelector(store => store.auth);
     const params = useParams();
     const jobId = params.id;
     const initialApplied = singleJob?.applications?.some(application => application.applicant == user?._id) || false;
-    let [isApplied, setisApplied] = useState(initialApplied);
 
+    let [isApplied, setisApplied] = useState(initialApplied);
     const handleApplyJob = async () => {
         try {
             const res = await axios.post(`${APPLICATION_END_POINT}/apply/${jobId}`, {}, { withCredentials: true })
