@@ -38,7 +38,7 @@ function Navbar() {
     <div className="flex justify-between px-4 items-center mx-auto max-w-full h-16
      bg-[#ffffff] border-b border-[#e2e8f0]">
       <div>
-        <h1 className="text-2xl font-bold">Job<span className="text-[#8b5cf6]">Portal</span></h1>
+        <h1 className="text-2xl font-bold">Job<span className="text-[#8b5cf6]">Hunt</span></h1>
       </div>
       <div className="flex gap-2">
         <ul className="flex font-medium items-center gap-5">
